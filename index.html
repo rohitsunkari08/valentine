@@ -91,7 +91,7 @@
 <body>
 
 <div class="container" id="card">
-    <img src="gif1.gif" id="gif">
+    <img id="gif">
     <h1 id="text"></h1>
 
     <div class="buttons" id="buttons">
@@ -101,11 +101,14 @@
 </div>
 
 <script>
+    const gif1 = "https://tenor.com/en-GB/view/dudu-bubu-peachugomu-gif-gif-14493167788598386806";
+    const gif2 = "https://tenor.com/en-GB/view/dudu-bubu-love-gif-peachugomu-gif-4232353899743732903";
     const textElement = document.getElementById("text");
     const gif = document.getElementById("gif");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const buttons = document.getElementById("buttons");
+    gif.src = gif1;
 
     const message = "Will you be my Valentine, Bangaram?";
     let index = 0;
@@ -135,7 +138,7 @@
 
     /* 💖 YES clicked */
     yesBtn.addEventListener("click", () => {
-        gif.src = "gif2.gif";
+        gif.src = "gif2";
         textElement.innerHTML = "Yayy! I Love You ❤️";
         buttons.style.display = "none";
         startHearts();
