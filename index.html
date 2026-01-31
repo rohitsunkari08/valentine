@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine 💖</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.65);
+            padding: 30px 40px;
+            border-radius: 25px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        img {
+            width: 220px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #d6336c;
+            margin-bottom: 25px;
+            min-height: 60px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute;
+            right: -100px;
+        }
+
+        /* ❤️ Heart rain */
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="card">
+    <img src="gif1.gif" id="gif">
+    <h1 id="text"></h1>
+
+    <div class="buttons" id="buttons">
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
+    </div>
+</div>
+
+<script>
+    const textElement = document.getElementById("text");
+    const gif = document.getElementById("gif");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const buttons = document.getElementById("buttons");
+
+    const message = "Will you be my Valentine, Bangaram?";
+    let index = 0;
+    let yesScale = 1;
+
+    /* ✍️ Typewriter effect */
+    function typeWriter() {
+        if (index < message.length) {
+            textElement.textContent += message.charAt(index);
+            index++;
+            setTimeout(typeWriter, 70);
+        }
+    }
+    typeWriter();
+
+    /* 😜 NO button runs away */
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 100 - 50;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    noBtn.addEventListener("click", () => {
+        yesScale += 0.2;
+        yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    /* 💖 YES clicked */
+    yesBtn.addEventListener("click", () => {
+        gif.src = "gif2.gif";
+        textElement.innerHTML = "Yayy! I Love You ❤️";
+        buttons.style.display = "none";
+        startHearts();
+    });
+
+    /* ❤️ Heart rain */
+    function startHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.textContent = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
